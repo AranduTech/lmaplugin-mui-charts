@@ -1,0 +1,27 @@
+{
+  "name": "@arandu/lmaplugin-mui-charts",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "lib/**/*"
+  ],
+  "devDependencies": {
+    "@types/react": "^18.2.45",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@arandu/laravel-mui-admin": "^0.4.9",
+    "@mui/material": "^5.13.5",
+    "@mui/x-charts": "^6.18.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

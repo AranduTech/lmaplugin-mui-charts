@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "esnext"
+        ],
+        "importHelpers": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "declaration": true,
+        "outDir": "./lib",
+        "rootDir": "./src",
+        "strict": true,
+        "esModuleInterop": true,
+        "jsx": "react-jsx",
+        /* Advanced Options */
+        "skipLibCheck": true /* Skip type checking of declaration files. */,
+        "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/__tests__/*"
+    ],
+}
