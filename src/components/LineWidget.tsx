@@ -6,6 +6,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import { Typography } from '@mui/material';
 import { AxisConfig, LineSeriesType } from '@mui/x-charts';
 import { MakeOptional } from '@mui/x-charts/models/helpers';
+import { applyFilters } from '@arandu/laravel-mui-admin';
 
 const LineWidget = ({ 
     args, data, debug, groups, title,
@@ -43,19 +44,26 @@ const LineWidget = ({
         return data
             .map((row) => row[group.alias || group.key] || '')
             .filter((value, index, self) => self.indexOf(value) === index)
-            .map((groupAlias) => ({
-                // data: data.filter((row) => row[group.alias || group.key] === groupAlias)
-                //     .map((row) => row[values[0].alias || values[0].key]),
-                data: xAxis[0]?.data?.map((x) => {
-                    return data.filter((row) => row[group.alias || group.key] === groupAlias)
-                        .find((row) => row[xAxisDefinition[0].alias || xAxisDefinition[0].key] === x)
-                        ?.[values[0].alias || values[0].key]
-                }),
-                label: `${groupAlias}`,
-                ...(args?.includes('stacked')
-                    ? ({ stack: 'total', area: true, stackOffset: 'none' })
-                    : {}),
-            }));
+            .map(function (groupAlias, index) {
+                let row = data[index];
+
+                const label = applyFilters(
+                    'mui_charts_widget_label',
+                    row[group.alias || group.key].toString(),
+                    { row, group }
+                );
+
+                return ({
+                    data: xAxis[0]?.data?.map((x) => {
+                        return data.filter((row) => row[group.alias || group.key] === groupAlias)
+                            .find((row) => row[xAxisDefinition[0].alias || xAxisDefinition[0].key] === x)?.[values[0].alias || values[0].key];
+                    }),
+                    label: label,
+                    ...(args?.includes('stacked')
+                        ? ({ stack: 'total', area: true, stackOffset: 'none' })
+                        : {}),
+                });
+            });
         
     }, [groups, data, values, args]);
 

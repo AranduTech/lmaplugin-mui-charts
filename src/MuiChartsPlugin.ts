@@ -20,6 +20,13 @@ const MuiChartsPlugin: LaravelMuiAdminPlugin = {
             bars: BarsWidget,
             pie: PieWidget,
         }));
+
+        addFilter('mui_charts_widget_label', (label: string, {row, group}) => {
+            if (group.type == 'BelongsToDimension') {
+                return row[group.relation].name;
+            }
+            return label;
+        })
     },
 
 };
