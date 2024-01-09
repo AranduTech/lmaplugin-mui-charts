@@ -69,13 +69,21 @@ const BarWidget = ({
         series,
     });
 
+    let layout: any = 'vertical';
+    if (args?.includes('horizontal')) layout = 'horizontal';
+
+    let props = {
+        layout,
+        [layout === 'horizontal' ? 'yAxis' : 'xAxis']: xAxis,
+    }
+
     return (
         <>
             <Typography>{title}</Typography>
             <BarChart
-                xAxis={xAxis}
                 series={series}
                 height={300}
+                {...props}
             />
         </>
     );
