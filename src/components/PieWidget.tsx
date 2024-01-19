@@ -9,13 +9,17 @@ import { MakeOptional } from '@mui/x-charts/models/helpers';
 import { applyFilters } from '@arandu/laravel-mui-admin';
 
 const PieWidget = ({ 
-    args, data, debug, groups, title,
+    args, data, debug, groups, title, 
+    style, options,
     uri, values,
 }: WidgetProps) => {
+
+    const { colors } = style;
+
     const group: any = groups[0];
 
     const series: MakeOptional<PieSeriesType<any>, 'type'>[] = React.useMemo(() => {
-        const groupedData = data.reduce((acc, row) => {
+        const groupedData = data.reduce((acc, row, index) => {
             const label = applyFilters(
                 'mui_charts_widget_label',
                 row[group.alias || group.key].toString(),
@@ -25,9 +29,10 @@ const PieWidget = ({
 
             if (!acc[label]) {
                 acc[label] = {
+                    id: label,
                     value,
                     label,
-                    id: label,
+                    color: colors?.[index % colors?.length],
                 };
             } else {
                 acc[label].value += value;
@@ -59,13 +64,7 @@ const PieWidget = ({
                 series={series}
                 height={300}
                 margin={{ right: 0 }}
-                slotProps={{
-                    legend: {
-                        direction: 'row',
-                        position: { vertical: 'bottom', horizontal: 'middle' },
-                        padding: 0,
-                    },
-                }}
+                slotProps={options}
             />
         </>
     );

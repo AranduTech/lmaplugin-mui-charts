@@ -9,9 +9,12 @@ import { MakeOptional } from '@mui/x-charts/models/helpers';
 import { applyFilters } from '@arandu/laravel-mui-admin';
 
 const LineWidget = ({ 
-    args, data, debug, groups, title,
+    args, data, debug, groups, title, 
+    style, options,
     uri, values, xAxis: xAxisDefinition,
 }: WidgetProps) => {
+
+    const { colors } = style;
 
     // const stackStrategy = ;
 
@@ -35,6 +38,7 @@ const LineWidget = ({
                 {
                     data: data.map((row) => row[values[0].alias || values[0].key]),
                     label: values[0].name,
+                    color: colors?.[0],
                 }
             ];
         }
@@ -62,6 +66,7 @@ const LineWidget = ({
                     ...(args?.includes('stacked')
                         ? ({ stack: 'total', area: true, stackOffset: 'none' })
                         : {}),
+                    color: colors?.[index % colors?.length],
                 });
             });
         
@@ -80,7 +85,7 @@ const LineWidget = ({
     if (debug) console.log('LineWidget ' + uri, {
         args, data, debug, groups, title,
         uri, values, xAxis, xAxisDefinition,
-        series,
+        series, style, options,
     });
 
     return (
@@ -90,6 +95,7 @@ const LineWidget = ({
                 xAxis={xAxis}
                 series={series}
                 height={300}
+                slotProps={options}
             />
         </>
     );

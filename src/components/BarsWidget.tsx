@@ -9,9 +9,12 @@ import { MakeOptional } from '@mui/x-charts/models/helpers';
 import { applyFilters } from '@arandu/laravel-mui-admin';
 
 const BarWidget = ({ 
-    args, data, debug, groups, title,
+    args, data, debug, groups, title, 
+    style, options, 
     uri, values, xAxis: xAxisDefinition,
 }: WidgetProps) => {
+
+    const { colors } = style;
 
     const xAxis: MakeOptional<AxisConfig, "id">[] = React.useMemo(() => {
         return xAxisDefinition.map((x) => {
@@ -31,6 +34,7 @@ const BarWidget = ({
                 {
                     data: data.map((row) => row[values[0].alias || values[0].key]),
                     label: values[0].name,
+                    color: colors?.[0],
                 }
             ];
         }
@@ -58,6 +62,7 @@ const BarWidget = ({
                     ...(args?.includes('stacked')
                         ? ({ stack: 'total' })
                         : {}),
+                    color: colors?.[index % colors?.length],
                 });
             });
         
@@ -66,7 +71,7 @@ const BarWidget = ({
     if (debug) console.log('BarWidget ' + uri, {
         args, data, debug, groups, title,
         uri, values, xAxis, xAxisDefinition,
-        series,
+        series, style, options,
     });
 
     let layout: any = 'vertical';
@@ -83,6 +88,7 @@ const BarWidget = ({
             <BarChart
                 series={series}
                 height={300}
+                slotProps={options}
                 {...props}
             />
         </>
