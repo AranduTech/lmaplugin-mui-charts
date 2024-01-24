@@ -10,7 +10,7 @@ import { applyFilters } from '@arandu/laravel-mui-admin';
 
 const BarWidget = ({ 
     args, data, debug, groups, title, 
-    style, options, 
+    layout: { style, options }, 
     uri, values, xAxis: xAxisDefinition,
 }: WidgetProps) => {
 
