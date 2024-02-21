@@ -14,7 +14,7 @@ const LineWidget = ({
     uri, values, xAxis: xAxisDefinition,
 }: WidgetProps) => {
 
-    const { colors } = style;
+    const { colors, thresholdColors } = style;
 
     // const stackStrategy = ;
 
@@ -96,6 +96,7 @@ const LineWidget = ({
                 series={series}
                 height={300}
                 slotProps={options}
+                {...style}
             />
         </>
     );

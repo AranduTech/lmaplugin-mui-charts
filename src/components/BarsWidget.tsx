@@ -14,7 +14,7 @@ const BarWidget = ({
     uri, values, xAxis: xAxisDefinition,
 }: WidgetProps) => {
 
-    const { colors } = style;
+    const { colors, thresholdColors } = style;
 
     const xAxis: MakeOptional<AxisConfig, "id">[] = React.useMemo(() => {
         return xAxisDefinition.map((x) => {
@@ -89,6 +89,7 @@ const BarWidget = ({
                 series={series}
                 height={300}
                 slotProps={options}
+                {...style}
                 {...props}
             />
         </>

@@ -14,7 +14,7 @@ const PieWidget = ({
     uri, values,
 }: WidgetProps) => {
 
-    const { colors } = style;
+    const { colors, thresholdColors } = style;
 
     const group: any = groups[0];
 
@@ -65,6 +65,7 @@ const PieWidget = ({
                 height={300}
                 margin={{ right: 0 }}
                 slotProps={options}
+                {...style}
             />
         </>
     );
