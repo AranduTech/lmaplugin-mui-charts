@@ -8,6 +8,7 @@ import { BarSeriesType, AxisConfig } from '@mui/x-charts';
 import { MakeOptional } from '@mui/x-charts/models/helpers';
 import { applyFilters } from '@arandu/laravel-mui-admin';
 import useBarChart from '../useBarChart';
+import { TitleBar } from './layouts/Titlebar';
 
 const BarWidget = (props: WidgetProps) => {
 
@@ -15,7 +16,7 @@ const BarWidget = (props: WidgetProps) => {
 
     return (
         <>
-            <Typography>{props.title}</Typography>
+            <TitleBar>{props.title}</TitleBar>
             <BarChart
                 {...barChartProps}
             />

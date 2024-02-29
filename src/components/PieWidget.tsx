@@ -7,6 +7,7 @@ import { Typography } from '@mui/material';
 import { PieSeriesType } from '@mui/x-charts';
 import { MakeOptional } from '@mui/x-charts/models/helpers';
 import { applyFilters } from '@arandu/laravel-mui-admin';
+import { TitleBar } from './layouts/Titlebar';
 
 const PieWidget = ({ 
     args, data, debug, groups, title, 
@@ -59,7 +60,7 @@ const PieWidget = ({
 
     return (
         <>
-            <Typography>{title}</Typography>
+            <TitleBar>{title}</TitleBar>
             <PieChart
                 series={series}
                 height={300}

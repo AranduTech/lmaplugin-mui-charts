@@ -7,6 +7,7 @@ import { Typography } from '@mui/material';
 import { AxisConfig, LineSeriesType } from '@mui/x-charts';
 import { MakeOptional } from '@mui/x-charts/models/helpers';
 import { applyFilters } from '@arandu/laravel-mui-admin';
+import { TitleBar } from './layouts/Titlebar';
 
 const LineWidget = ({ 
     args, data, debug, groups, title, 
@@ -90,7 +91,7 @@ const LineWidget = ({
 
     return (
         <>
-            <Typography>{title}</Typography>
+            <TitleBar>{title}</TitleBar>
             <LineChart
                 xAxis={xAxis}
                 series={series}
